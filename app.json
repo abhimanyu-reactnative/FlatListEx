@@ -1,0 +1,17 @@
+{
+  "name": "FlatListEx",
+  "displayName": "FlatListEx",
+  "expo": {
+    "name": "FlatListEx",
+    "slug": "FlatListEx",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
