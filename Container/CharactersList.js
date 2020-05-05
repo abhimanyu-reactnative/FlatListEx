@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, FlatList, Text, StyleSheet } from 'react-native'
+import { View, FlatList, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { fetchCharacterListRequest } from '../Reducers/CharacterListActions'
 import CharacterCell from './CharacterCell'
@@ -23,6 +23,23 @@ class CharactersList extends Component {
         this.props.fetchCharactersRequest()
     }
 
+    _onPress = (item) => {
+        //console.log(item)
+        this.props.navigation.navigate('CharacterDetail', {
+            itemId: item.item.id
+          });
+    }
+
+    renderItem = (item) => {
+        //alert(JSON.stringify(item));
+        return (
+            <TouchableOpacity onPress={() => this._onPress(item)}>
+                <CharacterCell characterData={item} />
+            </TouchableOpacity>
+        )
+
+    }
+
     render() {
         let { characterList } = this.props
         console.log(JSON.stringify(characterList.countryData))
@@ -34,13 +51,13 @@ class CharactersList extends Component {
                 {characterList.countryData.results ?
                     <FlatList
                         data={characterList.countryData.results}
-                        renderItem={(item) => <CharacterCell characterData={item} />}
+                        renderItem={(item) => this.renderItem(item)}
                         keyExtractor={item => item.id}
                         ItemSeparatorComponent={() => <View style={styles.separator} />}
                         onEndReached={({ distanceFromEnd }) => {
-                            console.log(" ***************** "+distanceFromEnd);
+                            console.log(" ***************** " + distanceFromEnd);
                             //this.apiCall();                 
-                          }}
+                        }}
                     />
                     :
                     null
@@ -62,7 +79,7 @@ const mapDispatchToProps = (dispatch) => ({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: "100%",
+        backgroundColor: '#fff',
     },
     navBar: {
         height: 64,
