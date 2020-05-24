@@ -1,6 +1,7 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import CharacterList from '../Container/CharactersList'
 import CharacterDetail from '../Container/CharacterDetail/CharacterDetail'
+import Episodes from '../Container/Episodes/Episodes'
 
 const AppNavigator = createStackNavigator({
     CharacterList: {
@@ -15,6 +16,13 @@ const AppNavigator = createStackNavigator({
     }
 );
 
-const AppContainer = createAppContainer(AppNavigator);
+const bottomBars = createBottomTabNavigator({
+    Character: AppNavigator,
+    Episodes : {
+        screen: Episodes
+    }
+})
+
+const AppContainer = createAppContainer(bottomBars);
 
 export default AppContainer

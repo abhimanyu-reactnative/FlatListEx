@@ -6,17 +6,18 @@ import {
 
 const initialData = {
     loading: false,
-    data: {},
+    data: null,
     error: ""
 }
 
 const reducer = (state=initialData, action) => {
-
+    console.log(action.type)
     switch(action.type){
         case FETCH_CHARACTER_REQUEST: {
             return {
                 ...state,
                 loading: true,
+                data: null
             }
         }
         case FETCH_CHARACTER_SUCCESS: {
@@ -30,10 +31,11 @@ const reducer = (state=initialData, action) => {
             return {
                 ...state,
                 data: {},
-                error: action.payload
+                error: action.payload,
+                loading: false
             }
         }
-        default: state
+        default: return state
 
     }
 }
